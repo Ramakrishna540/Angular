@@ -1,0 +1,53 @@
+pipeline{
+
+    agent any
+
+stages
+
+{
+
+  stage("Docker_login_yarn")
+
+  {
+
+    steps {
+
+        script {
+
+
+
+            sh "docker login -u naren3071 -p narendrankumar3071"
+
+    }    
+
+}
+
+}
+
+stage("image: Customer app")
+
+{
+
+    steps {
+
+        sh "docker build -t naren3071/angularproject:latest -f Dockerfile ."
+
+    }
+
+}
+
+stage("image:push")
+
+{
+
+    steps {
+         sh "docker login -u naren3071 -p narendrankumar3071"
+         sh "docker push naren3071/angularproject:latest"
+
+            }
+
+}
+
+}
+
+}
